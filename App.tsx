@@ -1,30 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Platform } from "react-native";
+import styled from "styled-components/native";
+import Box from "./Box";
+
+const boxes: number[] = new Array(10).fill("s").map((v, i) => i + 1);
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Open up App.tsx hello to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<Container>
+			{boxes.map((i) => {
+				return (
+					<Box key={i}>
+						<BoxText>#{i}</BoxText>
+					</Box>
+				);
+			})}
+			<StatusBar style="auto" />
+		</Container>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight:"bold",
- 
-  },
-  text:{
-    fontWeight:"bold",
+const Container = styled.View`
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	flex-direction: row;
+	flex-wrap: wrap;
+`;
 
-    ...Platform.select({
-      ios:{color:"red"},
-      android:{color:"blue"}
-    })
-  }
-});
+const BoxText = styled.Text`
+	font-size: 12px;
+	color: #222;
+`;
