@@ -1,22 +1,25 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Platform } from "react-native";
-import styled from "styled-components/native";
-import Box from "./Box";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const boxes: number[] = new Array(10).fill("s").map((v, i) => i + 1);
+import { StyleSheet, Button, View, Platform, StatusBar } from "react-native";
+import styled from "styled-components/native";
+import Details from "./Details";
+
+import Home from "./Home";
+import Settings from "./Settings";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 	return (
-		<Container>
-			{boxes.map((i) => {
-				return (
-					<Box key={i}>
-						<BoxText>#{i}</BoxText>
-					</Box>
-				);
-			})}
-			<StatusBar style="auto" />
-		</Container>
+		<>
+			<NavigationContainer>
+				<Stack.Navigator>
+					<Stack.Screen name="Home" component={Home} />
+					<Stack.Screen name="Details" component={Details} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</>
 	);
 }
 
